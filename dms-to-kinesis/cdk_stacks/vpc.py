@@ -23,6 +23,7 @@ class VpcStack(Stack):
     #
     vpc_name = self.node.try_get_context('vpc_name')
     self.vpc = aws_ec2.Vpc.from_lookup(self, 'ExistingVPC',
+      # is_default=True, # search the vpc in both custom and default VPCs
       vpc_name=vpc_name
     )
 

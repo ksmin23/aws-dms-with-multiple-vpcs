@@ -23,7 +23,7 @@ class DmsSourceDbStack(Stack):
 
     vpc_name = self.node.try_get_context("vpc_name")
     vpc = aws_ec2.Vpc.from_lookup(self, "DmsSourceVPC",
-      #is_default=True,
+      # is_default=True, # search the vpc in both custom and default VPCs
       vpc_name=vpc_name)
 
     sg_use_mysql = aws_ec2.SecurityGroup(self, 'MySQLClientSG',
