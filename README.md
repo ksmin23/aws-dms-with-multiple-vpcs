@@ -3,9 +3,17 @@
 
 This repository provides you cdk scripts and sample code on how to implement end to end pipeline for replicating transactional data from MySQL DB to Amazon OpenSearch Service through Amazon Kinesis using Amazon Data Migration Service(DMS).
 
-## Streaming Pipeline
+## Architecture
 
 Below diagram shows what we are implementing.
+
+<pre>
+ -------- VPC1 -------    -------------------- VPC2 ---------------------
+|  -----------------  |  |    ---------        ----------------------    |
+|  |  Aurora MySQL | ------> | AWS DMS | ---> | Kinesis Data Streams |   |
+|  -----------------  |  |    ---------        ----------------------    |
+ ---------------------    -----------------------------------------------
+</pre>
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
