@@ -7,13 +7,7 @@ This repository provides you cdk scripts and sample code on how to implement end
 
 Below diagram shows what we are implementing.
 
-<pre>
- -------- VPC1 -------    -------------------- VPC2 ---------------------
-|  -----------------  |  |    ---------        ----------------------    |
-|  |  Aurora MySQL | ------> | AWS DMS | ---> | Kinesis Data Streams |   |
-|  -----------------  |  |    ---------        ----------------------    |
- ---------------------    -----------------------------------------------
-</pre>
+![aws-dms-with-multiple-vpcs-arch](./aws-dms-with-multiple-vpcs-arch.svg)
 
 :warning:
 <font color=red><em>For testing easily, Aurora MySQL is provisioned in a public subnet. However, in production environment, you should provison the Aurora MySQL in a private subnet.</em></font>
