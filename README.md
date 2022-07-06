@@ -1,7 +1,7 @@
 
 # Amazon Data Migration Service(DMS) with multiple VPCs
 
-This repository provides you cdk scripts and sample code on how to implement end to end pipeline for replicating transactional data from MySQL DB to Amazon OpenSearch Service through Amazon Kinesis using Amazon Data Migration Service(DMS).
+This repository provides you cdk scripts and sample code on how to implement end to end pipeline for replicating transactional data from MySQL DB to Amazon Kinesis Data Streams with Amazon Data Migration Service(DMS).
 
 ## Architecture
 
