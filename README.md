@@ -15,7 +15,8 @@ Below diagram shows what we are implementing.
  ---------------------    -----------------------------------------------
 </pre>
 
-:warning: <span style="color:red"><em>For testing easily, Aurora MySQL is provisioned in a public subnet. However, in production environment, you should provison the Aurora MySQL in a private subnet.</em></span>
+:warning:
+<font color=red><em>For testing easily, Aurora MySQL is provisioned in a public subnet. However, in production environment, you should provison the Aurora MySQL in a private subnet.</em></font>
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
