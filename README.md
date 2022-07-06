@@ -55,20 +55,20 @@ command.
 
 At this point you can now synthesize the CloudFormation template for this code.
 
-   <pre>
-   (.venv) $ export CDK_DEFAULT_ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
-   (.venv) $ export CDK_DEFAULT_REGION=<i>region-name</i>
-   (.venv) $ cdk deploy --require-approval \
-                 DataLakeVPC
-   </pre>
+<pre>
+(.venv) $ export CDK_DEFAULT_ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
+(.venv) $ export CDK_DEFAULT_REGION=<i>region-name</i>
+(.venv) $ cdk deploy --require-approval \
+               DataLakeVPC
+</pre>
 
 Let's get NAT gateway public ips from the new VPC.
 
-   <pre>
-   (.venv) $ aws ec2 describe-nat-gateways --region <i>region-name</i> --filter Name=vpc-id,Values=<i>your-vpc-id</i> | jq -r '.NatGateways | .[] | .NatGatewayAddresses | .[] | .PublicIp'
-   34.xxx.xxx.xxx
-   52.xxx.xxx.xxx
-   </pre>
+<pre>
+(.venv) $ aws ec2 describe-nat-gateways --region <i>region-name</i> --filter Name=vpc-id,Values=<i>your-vpc-id</i> | jq -r '.NatGateways | .[] | .NatGatewayAddresses | .[] | .PublicIp'
+34.xxx.xxx.xxx
+52.xxx.xxx.xxx
+</pre>
 
 
 ## Creating Aurora MySQL cluster
@@ -203,35 +203,37 @@ Let's get NAT gateway public ips from the new VPC.
 
 ## Create Amazon Kinesis Data Streams for AWS DMS target endpoint
 
-  <pre>
-  (.venv) $ cd ../dms-to-kinesis
-  (.venv) $ pwd
-  ~/aws-dms-with-multiple-vpcs/dms-to-kinesis
-  (.venv) $ pip install -r requirements.txt
-  (.venv) $ cdk deploy \
-                -c vpc_name='<i>your-existing-vpc-name</i>' \
-                -c db_secret_name='<i>db-secret-name</i>' \
-                -e DMSTargetKinesisDataStreamStack \
-                --parameters TargetKinesisStreamName=<i>your-kinesis-stream-name</i>
-  </pre>
+<pre>
+(.venv) $ cd ../dms-to-kinesis
+(.venv) $ pwd
+~/aws-dms-with-multiple-vpcs/dms-to-kinesis
+(.venv) $ pip install -r requirements.txt
+(.venv) $ cdk deploy \
+             -c vpc_name='<i>your-existing-vpc-name</i>' \
+             -c db_secret_name='<i>db-secret-name</i>' \
+             -e DMSTargetKinesisDataStreamStack \
+             --parameters TargetKinesisStreamName=<i>your-kinesis-stream-name</i>
+</pre>
 
 ## Create AWS DMS Replication Task
-  For example, we already created the sample database (i.e. `testdb`) and table (`retail_trans`)
-  <pre>
-  (.venv) $ cdk deploy \
-                -c vpc_name='<i>your-existing-vpc-name</i>' \
-                -c db_secret_name='<i>db-secret-name</i>' \
-                -e DMSAuroraMysqlToKinesisStack \
-                --parameters SourceDatabaseName=<i>testdb</i> \
-                --parameters SourceTableName=<i>retail_trans</i>
-  </pre>
+
+For example, we already created the sample database (i.e. `testdb`) and table (`retail_trans`)
+<pre>
+(.venv) $ cdk deploy \
+             -c vpc_name='<i>your-existing-vpc-name</i>' \
+             -c db_secret_name='<i>db-secret-name</i>' \
+             -e DMSAuroraMysqlToKinesisStack \
+             --parameters SourceDatabaseName=<i>testdb</i> \
+             --parameters SourceTableName=<i>retail_trans</i>
+</pre>
 
 ## Run Test
 
 Start the DMS Replication task by replacing the ARN in below command.
-   <pre>
-   (.venv) $ aws dms start-replication-task --replication-task-arn <i>dms-task-arn</i> --start-replication-task-type start-replication
-   </pre>
+
+<pre>
+(.venv) $ aws dms start-replication-task --replication-task-arn <i>dms-task-arn</i> --start-replication-task-type start-replication
+</pre>
 
 
 ## Clean Up
@@ -265,9 +267,7 @@ Enjoy!
  * [How to troubleshoot binary logging errors that I received when using AWS DMS with Aurora MySQL as the source?(Last updated: 2019-10-01)](https://aws.amazon.com/premiumsupport/knowledge-center/dms-binary-logging-aurora-mysql/)
  * [AWS DMS - Using Amazon Kinesis Data Streams as a target for AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html)
  * [Specifying task settings for AWS Database Migration Service tasks](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html#CHAP_Tasks.CustomizingTasks.TaskSettings.Example)
- * [Windows SSH / Tunnel for Kibana Instructions - Amazon Elasticsearch Service](https://search-sa-log-solutions.s3-us-east-2.amazonaws.com/logstash/docs/Kibana_Proxy_SSH_Tunneling_Windows.pdf)
- * [Use an SSH Tunnel to access Kibana within an AWS VPC with PuTTy on Windows](https://amazonmsk-labs.workshop.aws/en/mskkdaflinklab/createesdashboard.html)
- * [OpenSearch Popular APIs](https://opensearch.org/docs/latest/opensearch/popular-api/)
+ * [AWS DMS - Setting up a network for a replication instance](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.VPC.html)
 
 ## Security
 
