@@ -1,7 +1,7 @@
 
 # Amazon Data Migration Service(DMS) with multiple VPCs
 
-This repository provides you cdk scripts and sample code on how to implement end to end pipeline for replicating transactional data from MySQL DB to Amazon Kinesis Data Streams with Amazon Data Migration Service(DMS).
+This repository provides you cdk scripts and sample code on how to implement end to end pipeline for replicating transactional data from MySQL DB in one VPC to Amazon Kinesis Data Streams in other VPC with Amazon Data Migration Service(DMS).
 
 ## Architecture
 
@@ -104,6 +104,8 @@ Let's get NAT gateway public ips from the new VPC.
                  DmsSourceDbStack
    </pre>
 
+<em>In order to set up MySQL, you need to connect Aurora MySQL cluster on either your local PC or a EC2 instance.</em>
+
 ## Confirm that binary logging is enabled
 
 1. Connect to the Aurora cluster writer node.
@@ -200,6 +202,8 @@ Let's get NAT gateway public ips from the new VPC.
 
     MySQL [testdb]>    
    </pre>
+
+<em>After setting up MySQL, you should come back to the terminal where you are deploying stacks.</em>
 
 ## Create Amazon Kinesis Data Streams for AWS DMS target endpoint
 
